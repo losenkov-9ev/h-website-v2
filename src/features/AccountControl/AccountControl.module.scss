@@ -1,0 +1,75 @@
+@import '../../app/styles/variables.scss';
+
+.accountControl {
+  max-width: 100%;
+  width: 100%;
+  padding: 24px 32px;
+  border-radius: 16px;
+  background: var(--gray-0-800);
+
+  &_title {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 38px;
+    margin-bottom: 16px;
+  }
+
+  &.switchTheme {
+    background: var(--gray-800-100);
+    .accountControl_title {
+      color: var(--gray-0-900);
+    }
+  }
+
+  &_box {
+    display: flex;
+    max-width: 100%;
+    width: 100%;
+    align-items: stretch;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  &_input {
+    padding: 6px 16px !important;
+  }
+  &_inputWrapper {
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    span {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 12px;
+    }
+  }
+  &_balanceInput {
+    padding-right: 34px !important;
+  }
+  &_select {
+    & > div {
+      border-radius: 8px;
+    }
+    :global(.select_field) {
+      background-color: var(--gray-100-900);
+    }
+  }
+  @media (max-width: $screen-m) {
+    padding: 16px 24px;
+
+    &_title {
+      font-size: 20px;
+      line-height: 28px;
+      margin-bottom: 16px;
+    }
+    &_box {
+      margin-bottom: 24px;
+      gap: 8px;
+    }
+  }
+  @media (max-width: $screen-l) {
+    &_box {
+      flex-direction: column;
+    }
+  }
+}

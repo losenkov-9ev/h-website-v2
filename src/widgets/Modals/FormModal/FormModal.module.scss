@@ -1,0 +1,46 @@
+@import '../../../app/styles/variables.scss';
+
+.formModal {
+  padding: 16px 8px;
+
+  &_title {
+    text-align: center;
+    font-size: 24px;
+    line-height: 38px;
+    font-weight: 400;
+    margin-bottom: 32px;
+  }
+  &_box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  &_input {
+    background-color: var(--gray-0-800);
+    border-radius: 8px !important;
+  }
+  &_footerButton {
+    padding: 8px;
+    white-space: nowrap;
+  }
+  &_footer {
+    display: flex;
+    gap: 8px;
+
+    :global(.link) {
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: $screen-s) {
+    padding: 0;
+    padding-bottom: 8px;
+    &_title {
+      margin-bottom: 24px;
+    }
+    &_box {
+      margin-bottom: 24px;
+    }
+  }
+}
