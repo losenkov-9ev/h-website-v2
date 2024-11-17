@@ -3,6 +3,7 @@ import { ELoadingStatus } from '../../@types/types';
 import { ErrorPayload } from '../../@types/errors';
 import { createPayment } from './thunks';
 import { IPaymentsState, IResponse } from './types';
+import { convertToUserTimeZone } from '../../utils/timeUtils';
 
 const initialState: IPaymentsState = {
   data: null,
@@ -24,6 +25,7 @@ const paymentSlice = createSlice({
         (state: IPaymentsState, action: PayloadAction<IResponse>) => {
           state.status = ELoadingStatus.fulfilled;
           state.data = action.payload;
+          state.data.payment.datetime = convertToUserTimeZone(action.payload.payment.datetime);
         },
       )
       .addCase(createPayment.rejected, (state: IPaymentsState, action: ErrorPayload) => {

@@ -13,6 +13,7 @@ import { Notiffications } from '../../../shared/Notiffications';
 import { selectTheme } from '../../../app/redux/theme/selectors';
 import { selectIsAuth, selectLinks, selectSupportLink } from '../../../app/redux/info/selectors';
 import { HeaderSkeleton } from './HeaderSkeleton';
+import { isTelegramUrlValid } from '../../../app/utils/isTelegramUrlValid';
 
 export const MobileHeader: React.FC<MobileHeaderProps> = ({
   isMenuOpen,
@@ -70,15 +71,15 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
               <Link to={ELocation.reviews} className={cls.headerMenu_link}>
                 Отзывы
               </Link>
-              {supportLink && (
+              {supportLink && isTelegramUrlValid(supportLink) && (
                 <Link to={supportLink} target="_blank" className={cls.headerMenu_link}>
                   Поддержка
                 </Link>
               )}
-              {links.map(({ link, text }) => {
+              {links.map(({ link, text }, idx) => {
                 if (text) {
                   return (
-                    <Link to={link} className={cls.headerMenu_link}>
+                    <Link to={link} key={`${text}_${idx}`} className={cls.headerMenu_link}>
                       {text}
                     </Link>
                   );

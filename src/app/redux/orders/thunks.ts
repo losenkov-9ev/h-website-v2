@@ -6,6 +6,7 @@ import { handleAxiosError, RejectType } from '../../utils/handleAxiosError';
 
 export const fetchAllOrders = createAsyncThunk('orders/fetchAllOrders', async () => {
   const { data } = await axios.post(`/orders/get/`);
+
   return data;
 });
 

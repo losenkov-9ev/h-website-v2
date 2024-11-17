@@ -10,7 +10,6 @@ import { fetchAllOrders } from '../../app/redux/orders/thunks';
 import { selectAllOrders, selectAllOrdersStatus } from '../../app/redux/orders/selectors';
 import { ELoadingStatus } from '../../app/@types/types';
 import { CardLoader } from '../../features/Card/CardLoader';
-import { Button } from '../../shared/Button';
 
 export const AccontPurchaseHistory: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -51,7 +50,6 @@ export const AccontPurchaseHistory: React.FC = () => {
                   ),
                 )}
           </div>
-          <Button fullWidth={false}>Показать еще</Button>
         </div>
       </div>
     </div>

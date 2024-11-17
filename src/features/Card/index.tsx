@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { AbridgedCardProps, CardProps, isCardProps } from './context/types';
 import { PaymentModal } from '../../widgets/Modals/PaymentModal';
 import { useWindowWidth } from '../../app/hooks/useWindowWidth';
@@ -14,27 +16,38 @@ import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { selectCurrency } from '../../app/redux/info/selectors';
 import { formatNumberWithDelimiter } from '../../app/utils/formatNumberWithDelimiter';
+import { ProductModal } from '../../widgets/Modals/ProductModal';
 
 export interface CardContentProps {
   type: 'abridged' | 'normal' | 'inline';
 }
 
 const CardContent: React.FC<CardContentProps> = ({ type }) => {
+  const [isInfoModalOpened, setIsInfoModalOpened] = React.useState<boolean>(false);
+
+  const { symbol: currencySymbol } = useSelector(selectCurrency);
   const { openModal, cardData } = useContext(CardContext);
   const { name, price } = cardData;
 
-  const { symbol: currencySymbol } = useSelector(selectCurrency);
-
   const isMobile = useWindowWidth(DEFAULT_SCREEN_WIDTH.S);
+
+  const onCloseInfoModal = () => {
+    setIsInfoModalOpened(false);
+  };
+
+  const onOpenInfoModal = () => {
+    cardData.date && setIsInfoModalOpened(true);
+  };
 
   const mods: Mods = {
     [cls.card_abridged]: type === 'abridged',
     [cls.card_inline]: type === 'inline',
+    [cls.card_info]: cardData.date,
   };
 
   return (
     <>
-      <div className={clsx(cls.card, mods)}>
+      <div onClick={onOpenInfoModal} className={clsx(cls.card, mods)}>
         {isCardProps(cardData) && type === 'normal' ? (
           <div className={cls.card_head}>
             <div className={cls.card_breadcrumbs}>
@@ -75,6 +88,9 @@ const CardContent: React.FC<CardContentProps> = ({ type }) => {
         </div>
       </div>
       <PaymentModal />
+      {cardData.date && (
+        <ProductModal onRequestClose={onCloseInfoModal} isOpen={isInfoModalOpened} />
+      )}
     </>
   );
 };

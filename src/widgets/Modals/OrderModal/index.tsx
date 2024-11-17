@@ -1,10 +1,9 @@
 import React from 'react';
+
 import { ELocation } from '../../../app/@types/types';
-import cls from './OrderModal.module.scss';
 import { ModalWrapper } from '..';
 import { useCopyToClipboard } from '../../../app/hooks/useCopyToClipboard';
 import { TDefaultProps } from '../types';
-import Icon from '../../../shared/Icon';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../app/redux/store';
 import { useSelector } from 'react-redux';
@@ -13,6 +12,10 @@ import { formatNumberWithDelimiter } from '../../../app/utils/formatNumberWithDe
 import { selectAccountPayment, selectPayment } from '../../../app/redux/payment/selectors';
 import { PaymentStatus } from '../../../shared/PaymentStatus';
 import { selectCurrency } from '../../../app/redux/info/selectors';
+
+import cls from './OrderModal.module.scss';
+import Icon from '../../../shared/Icon';
+import clsx from 'clsx';
 
 export type OrderModalProps = TDefaultProps & {
   orderId?: number;
@@ -48,16 +51,20 @@ export const ModalInfo: React.FC<ModalInfoProps> = (props) => {
     handleFooterButtonClick,
   } = props;
 
-  const { isCopied, isButtonDisabled, copyToClipboard } = useCopyToClipboard();
-  const { symbol } = useSelector(selectCurrency);
+  const {
+    isCopied: isCopiedWallet,
+    isButtonDisabled: isWalletButtonDisabled,
+    copyToClipboard: copyWalletToClipboard,
+  } = useCopyToClipboard();
 
-  const handleCopyClick = () => {
-    wallet && copyToClipboard(wallet);
-  };
+  const { isCopied: isCopiedTXID, copyToClipboard: copyTXIDToClipboard } = useCopyToClipboard();
+  const { isCopied: isCopiedAmount, copyToClipboard: copyAmountToClipboard } = useCopyToClipboard();
+
+  const { symbol } = useSelector(selectCurrency);
 
   return (
     <>
-      <div className={cls.orderModal_title}>Заказ #{id}</div>
+      <div className={cls.orderModal_title}>Пополнение #{id}</div>
       <PaymentStatus statusID={orderStaus} />
       {wallet && (
         <div className={cls.orderModal_details}>
@@ -69,13 +76,22 @@ export const ModalInfo: React.FC<ModalInfoProps> = (props) => {
               disabled={true}
               className={cls.orderModal_detailsInput}
             />
-            <button disabled={isButtonDisabled} onClick={handleCopyClick}>
-              {isCopied ? <Icon.Checked /> : <Icon.Copy />}
+            <button disabled={isWalletButtonDisabled} onClick={() => copyWalletToClipboard(wallet)}>
+              {isCopiedWallet ? <Icon.Checked /> : <Icon.Copy />}
             </button>
           </div>
 
-          <div className={cls.orderModal_value}>
-            <span>К оплате</span>
+          <div
+            onClick={() =>
+              copyAmountToClipboard(String(amount).slice(0, String(amount).length - 1))
+            }
+            className={clsx(cls.orderModal_value, cls.orderModal_value_withCopy)}>
+            <span>
+              К оплате
+              <div className={cls.orderModal_copySmall}>
+                {isCopiedAmount ? <Icon.Checked /> : <Icon.Copy />}
+              </div>
+            </span>
             <span></span>
             <span>{formatNumberWithDelimiter(amount)}</span>
           </div>
@@ -92,7 +108,7 @@ export const ModalInfo: React.FC<ModalInfoProps> = (props) => {
           </div>
         )}
         <div className={cls.orderModal_value}>
-          <span>Номер заказа</span>
+          <span>Номер пополнения</span>
           <span></span>
           <span>{id}</span>
         </div>
@@ -100,12 +116,19 @@ export const ModalInfo: React.FC<ModalInfoProps> = (props) => {
           <div className={cls.orderModal_value}>
             <span>Истекает через:</span>
             <span></span>
-            <span>{expire}</span>
+            {expire}
           </div>
         )}
         {txID && (
-          <div className={cls.orderModal_value}>
-            <span>TxID</span>
+          <div
+            onClick={() => copyTXIDToClipboard(txID)}
+            className={clsx(cls.orderModal_value, cls.orderModal_value_withCopy)}>
+            <span>
+              TxID
+              <div className={cls.orderModal_copySmall}>
+                {isCopiedTXID ? <Icon.Checked /> : <Icon.Copy />}
+              </div>
+            </span>
             <span></span>
             <span>{txID}</span>
           </div>
@@ -166,6 +189,7 @@ export const OrderModal: React.FC<OrderModalProps> = (props) => {
 
     return (
       <ModalWrapper
+        closeOnBgClick={false}
         {...props}
         content={
           <div className={cls.orderModal}>

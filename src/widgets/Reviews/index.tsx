@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 import cls from './Reviews.module.scss';
 import clsx from 'clsx';
-import { Button } from '../../shared/Button';
+// import { Button } from '../../shared/Button';
 import { ELoadingStatus, Mods } from '../../app/@types/types';
 import { ReviewCardLoader } from '../../features/ReviewCard/ReviewCardLoader';
 import { useWindowWidth } from '../../app/hooks/useWindowWidth';
@@ -27,6 +27,7 @@ export const Reviews: React.FC<ReviewsProps> = ({
   isReviewsPage = false,
 }) => {
   const [page, setPage] = React.useState<number>(1);
+  setPage(1);
 
   const dispatch = useAppDispatch();
 
@@ -65,12 +66,12 @@ export const Reviews: React.FC<ReviewsProps> = ({
               ))}
             </div>
           )}
-          <Button
+          {/* <Button
             fullWidth={false}
             className={cls.reviews_loadMore}
             onClick={() => setPage((prev) => prev + 1)}>
             Смотреть все
-          </Button>
+          </Button> */}
         </div>
       </div>
     </ReviewsProvider>

@@ -8,6 +8,7 @@ export interface SelectProps {
   onChange?: (value: string | ReactNode) => void;
   className?: string;
   themeReverse?: boolean;
+  isDropdownFullWidth?: boolean;
 }
 
 export interface OptionProps {

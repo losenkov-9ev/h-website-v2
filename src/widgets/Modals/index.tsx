@@ -5,7 +5,12 @@ import { type IModalProps } from './types';
 import cls from './Modal.module.scss';
 import Icon from '../../shared/Icon';
 
-export const ModalWrapper: React.FC<IModalProps> = ({ isOpen, onRequestClose, content }) => {
+export const ModalWrapper: React.FC<IModalProps> = ({
+  isOpen,
+  onRequestClose,
+  content,
+  closeOnBgClick = true,
+}) => {
   React.useEffect(() => {
     isOpen
       ? document.body.classList.add('fixed-modal')
@@ -25,10 +30,12 @@ export const ModalWrapper: React.FC<IModalProps> = ({ isOpen, onRequestClose, co
         beforeClose: cls.ModalWrapper_overlay__before_close,
       }}
       closeTimeoutMS={200}
-      shouldCloseOnOverlayClick>
-      <button className={cls.ModalWrapper_close} onClick={onRequestClose}>
-        <Icon.Close />
-      </button>
+      shouldCloseOnOverlayClick={closeOnBgClick}>
+      {closeOnBgClick && (
+        <button className={cls.ModalWrapper_close} onClick={onRequestClose}>
+          <Icon.Close />
+        </button>
+      )}
       <div className={cls.ModalWrapper_box}>{content}</div>
     </Modal>
   );

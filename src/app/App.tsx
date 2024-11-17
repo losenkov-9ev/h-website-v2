@@ -11,10 +11,13 @@ import { Reviews } from '../pages/Reviews';
 import { useScrollbarWidth } from './hooks/useScrollbarWidth';
 import { useAppDispatch } from './redux/store';
 import { fetchInfo } from './redux/info/thunks';
+import { selectSiteInfo } from './redux/info/selectors';
 
 export const App: React.FC = () => {
-  const { theme } = useSelector(selectTheme);
   const dispatch = useAppDispatch();
+
+  const { theme } = useSelector(selectTheme);
+  const { siteInfo } = useSelector(selectSiteInfo);
 
   useTheme(theme);
   useScrollbarWidth();
@@ -22,6 +25,10 @@ export const App: React.FC = () => {
   React.useEffect(() => {
     dispatch(fetchInfo());
   }, []);
+
+  React.useEffect(() => {
+    document.title = siteInfo.title;
+  }, [siteInfo]);
 
   return (
     <Routes>

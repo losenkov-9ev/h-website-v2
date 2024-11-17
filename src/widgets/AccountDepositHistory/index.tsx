@@ -5,7 +5,6 @@ import clsx from 'clsx';
 
 import { EmptyBlock } from '../../shared/EmptyBlock';
 import { useSelector } from 'react-redux';
-import { Button } from '../../shared/Button';
 import { selectAllPayments } from '../../app/redux/info/selectors';
 import { DepositCard } from '../../features/DepositCard';
 import { CardLoader } from '../../features/Card/CardLoader';
@@ -39,7 +38,6 @@ export const AccountDepositHistory: React.FC = () => {
               new Array(6).fill('').map((_, idx) => <CardLoader key={idx} />)
             )}
           </div>
-          <Button fullWidth={false}>Показать еще</Button>
         </div>
       </div>
     </div>

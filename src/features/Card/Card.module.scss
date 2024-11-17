@@ -9,6 +9,10 @@
   min-height: 240px;
   min-width: 280px;
 
+  &.card_info {
+    cursor: pointer;
+  }
+
   &.card_abridged {
     .card_title {
       width: auto;

@@ -106,6 +106,10 @@
     max-height: 300px;
     overflow: auto;
 
+    &.dropdown_fullWidth {
+      left: 0;
+    }
+
     &::-webkit-scrollbar {
       width: 2px;
     }

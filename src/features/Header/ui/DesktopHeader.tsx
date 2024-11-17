@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { Button, EButtonView } from '../../../shared/Button';
 import clsx from 'clsx';
 import { selectIsAuth, selectLinks, selectSupportLink } from '../../../app/redux/info/selectors';
+import { isTelegramUrlValid } from '../../../app/utils/isTelegramUrlValid';
 
 export const DesktopHeader: React.FC<HeaderProps> = ({ onOpenModal }) => {
   const { data: isAuthorized, status: authStatus } = useSelector(selectIsAuth);
@@ -40,7 +41,7 @@ export const DesktopHeader: React.FC<HeaderProps> = ({ onOpenModal }) => {
             <Link to={ELocation.reviews} className={cls.header_menuLink}>
               Отзывы
             </Link>
-            {supportLink && (
+            {supportLink && isTelegramUrlValid(supportLink) && (
               <Link to={supportLink} target="_blank" className={cls.header_menuLink}>
                 Поддержка
               </Link>

@@ -30,6 +30,7 @@ export const Filter: React.FC = () => {
           className={cls.filter_select}
           key={`${filterName}_${idx}`}
           withShadow={false}
+          isDropdownFullWidth={true}
           placeholder={EFilterNames[filterName as keyof typeof EFilterNames]}>
           {(items as TFilterType[]).map(({ id, name }: TFilterType, idx: number) => (
             <Select.Option

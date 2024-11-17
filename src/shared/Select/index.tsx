@@ -5,6 +5,8 @@ import cls from './Select.module.scss';
 import Icon from '../Icon';
 import clsx from 'clsx';
 import { Mods } from '../../app/@types/types';
+import { useWindowWidth } from '../../app/hooks/useWindowWidth';
+import { DEFAULT_SCREEN_WIDTH } from '../../app/constants';
 
 const SelectContext = createContext<SelectContextProps | undefined>(undefined);
 
@@ -17,10 +19,14 @@ const Select: SelectType = (props) => {
     className,
     withShadow,
     themeReverse,
+    isDropdownFullWidth,
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState<string | ReactNode>('');
+
+  const [dropdown_fullWidth, setDropdownFullWidth] = useState<boolean>(false);
+  const isMobile = useWindowWidth(DEFAULT_SCREEN_WIDTH.M);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -48,6 +54,14 @@ const Select: SelectType = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isDropdownFullWidth) {
+      isMobile ? setDropdownFullWidth(true) : setDropdownFullWidth(false);
+    } else {
+      setDropdownFullWidth(isDropdownFullWidth);
+    }
+  }, [isMobile, isDropdownFullWidth]);
+
   const mods: Mods = {
     [cls.fullWidth]: fullWidth,
     [cls.withShadow]: withShadow,
@@ -63,7 +77,14 @@ const Select: SelectType = (props) => {
           {selectedValue || placeholder}
           <Icon.SelectToggler />
         </div>
-        {isOpen && <div className={cls.select_dropdown}>{children}</div>}
+        {isOpen && (
+          <div
+            className={clsx(cls.select_dropdown, {
+              [cls.dropdown_fullWidth]: dropdown_fullWidth,
+            })}>
+            {children}
+          </div>
+        )}
       </div>
     </SelectContext.Provider>
   );
