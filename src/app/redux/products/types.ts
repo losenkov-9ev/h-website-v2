@@ -1,12 +1,12 @@
 import { ELoadingStatus } from '../../@types/types';
 
 export type TFilterType = { id: number; name: string };
-export type TFilterData = {
+type TFilterData = {
   sections: TFilterType[];
   categories: TFilterType[];
 };
 
-export interface IProduct {
+interface IProduct {
   id: number;
   status: boolean;
   image: string;

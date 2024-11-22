@@ -13,15 +13,13 @@ export function debounce<T extends (...args: any[]) => any>(
 ): DebounceFunction<T> {
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  return function (this: any, ...args: Parameters<T>) {
-    const context = this;
-
+  return function (this: unknown, ...args: Parameters<T>) {
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
     }
 
     timeoutId = setTimeout(() => {
-      func.apply(context, args);
+      func.apply(this, args);
     }, delay);
   };
 }

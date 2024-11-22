@@ -1,13 +1,13 @@
 import { ELoadingStatus } from '../../@types/types';
 
-export interface IOrderListItem {
+interface IOrderListItem {
   amount: number;
   datetime: string;
   id: number;
   title: string;
 }
 
-export interface IOrder {
+interface IOrder {
   id: number;
   product_id: number;
   product_name: string;
@@ -24,8 +24,6 @@ export type IResponseAllOrders = {
 
 export type fetchOrderParams = { order_id: number };
 export type postOrderParams = { product_id: number; count?: number };
-
-export type IResponseOrder = { ok: true; order: IOrder };
 
 export interface IOrdersState {
   allOrders: {

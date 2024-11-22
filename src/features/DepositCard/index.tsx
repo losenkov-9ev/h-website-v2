@@ -5,7 +5,7 @@ import { selectCurrency } from '../../app/redux/info/selectors';
 import { PaymentStatus } from '../../shared/PaymentStatus';
 import { OrderModal } from '../../widgets/Modals/OrderModal';
 
-export interface DepositCardProps {
+interface DepositCardProps {
   id: number;
   currency: string;
   value: number;

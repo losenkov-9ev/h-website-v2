@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrency } from '../../../app/redux/info/selectors';
 import { Button, EButtonView } from '../../../shared/Button';
 
-export type ProductModalProps = TDefaultProps;
+type ProductModalProps = TDefaultProps;
 
 export const ProductModal: React.FC<ProductModalProps> = (props) => {
   const { symbol } = useSelector(selectCurrency);

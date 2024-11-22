@@ -18,7 +18,7 @@ import { selectCurrency } from '../../app/redux/info/selectors';
 import { formatNumberWithDelimiter } from '../../app/utils/formatNumberWithDelimiter';
 import { ProductModal } from '../../widgets/Modals/ProductModal';
 
-export interface CardContentProps {
+interface CardContentProps {
   type: 'abridged' | 'normal' | 'inline';
 }
 

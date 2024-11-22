@@ -9,9 +9,13 @@ import { selectAllPayments } from '../../app/redux/info/selectors';
 import { DepositCard } from '../../features/DepositCard';
 import { CardLoader } from '../../features/Card/CardLoader';
 import { ELoadingStatus } from '../../app/@types/types';
+import { InlineCardLoader } from '../../features/Card/InlineCardLoader';
+import { useWindowWidth } from '../../app/hooks/useWindowWidth';
+import { DEFAULT_SCREEN_WIDTH } from '../../app/constants';
 
 export const AccountDepositHistory: React.FC = () => {
   const { items, status } = useSelector(selectAllPayments);
+  const isMobile = useWindowWidth(DEFAULT_SCREEN_WIDTH.L);
 
   return (
     <div className={cls.accountDepositHistory}>
@@ -35,7 +39,11 @@ export const AccountDepositHistory: React.FC = () => {
                 <EmptyBlock value="Вы пока не пополняли аккаунт" />
               )
             ) : (
-              new Array(6).fill('').map((_, idx) => <CardLoader key={idx} />)
+              new Array(6)
+                .fill('')
+                .map((_, idx) =>
+                  !isMobile ? <InlineCardLoader key={idx} /> : <CardLoader key={idx} />,
+                )
             )}
           </div>
         </div>

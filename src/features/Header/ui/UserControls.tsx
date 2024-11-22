@@ -9,13 +9,15 @@ import { DEFAULT_SCREEN_WIDTH } from '../../../app/constants';
 import { Button, EButtonView } from '../../../shared/Button';
 import { Notiffications } from '../../../shared/Notiffications';
 import { fetchLogout } from '../../../app/redux/auth/thunks';
-import { selectAccount, selectCurrency } from '../../../app/redux/info/selectors';
+import { selectAccount, selectCurrency, selectIsAuth } from '../../../app/redux/info/selectors';
 import { formatNumberWithDelimiter } from '../../../app/utils/formatNumberWithDelimiter';
 
 export const UserControls: React.FC = () => {
   const {
     data: { data: user },
   } = useSelector(selectAccount);
+  const isAuth = useSelector(selectIsAuth);
+
   const dispath = useAppDispatch();
   const navigate = useNavigate();
 
@@ -43,7 +45,7 @@ export const UserControls: React.FC = () => {
         <Button view={EButtonView.square} onClick={handleLogout}>
           <Icon.Logout />
         </Button>
-        <Notiffications />
+        {isAuth && <Notiffications />}
       </div>
     ) : (
       <>

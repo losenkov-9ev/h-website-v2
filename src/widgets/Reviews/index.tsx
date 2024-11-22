@@ -15,7 +15,7 @@ import { ReviewCardLoader } from '../../features/ReviewCard/ReviewCardLoader';
 import { useWindowWidth } from '../../app/hooks/useWindowWidth';
 import { DEFAULT_SCREEN_WIDTH } from '../../app/constants';
 
-export interface ReviewsProps {
+interface ReviewsProps {
   title?: string;
   type?: 'default' | 'masonry';
   isReviewsPage?: boolean;
@@ -27,14 +27,16 @@ export const Reviews: React.FC<ReviewsProps> = ({
   isReviewsPage = false,
 }) => {
   const [page, setPage] = React.useState<number>(1);
-  setPage(1);
-
   const dispatch = useAppDispatch();
 
   const items = useSelector(selectReviews);
   const status = useSelector(selectReviewsStatus);
 
   const isMobileReviews = useWindowWidth(DEFAULT_SCREEN_WIDTH.L);
+
+  React.useEffect(() => {
+    setPage(1);
+  }, []);
 
   React.useEffect(() => {
     dispatch(fetchReviews({ page }));

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrency } from '../../../app/redux/info/selectors';
 import { formatNumberWithDelimiter } from '../../../app/utils/formatNumberWithDelimiter';
 
-export type ReviewModalProps = TDefaultProps & {
+type ReviewModalProps = TDefaultProps & {
   title: string;
   price: number;
   rate: number;

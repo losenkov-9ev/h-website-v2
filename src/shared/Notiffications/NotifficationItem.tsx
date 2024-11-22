@@ -2,7 +2,7 @@ import React from 'react';
 import cls from './Notiffications.module.scss';
 import Icon from '../Icon';
 
-export interface NotifficationItemProps {
+interface NotifficationItemProps {
   title: string;
   text: string;
   image?: string | null;

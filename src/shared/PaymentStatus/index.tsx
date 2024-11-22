@@ -3,7 +3,7 @@ import React from 'react';
 import cls from './PaymentStatus.module.scss';
 import { Mods } from '../../app/@types/types';
 
-export interface PaymentStatusProps {
+interface PaymentStatusProps {
   statusID: number;
 }
 

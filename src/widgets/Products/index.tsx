@@ -10,9 +10,10 @@ import { useAppDispatch } from '../../app/redux/store';
 import { fetchProducts } from '../../app/redux/products/thunks';
 import { selectProducts, selectProductsStatus } from '../../app/redux/products/selectors';
 import { AbridgedCard, InlineCard } from '../../features/Card';
-import { CardLoader } from '../../features/Card/CardLoader';
 import { useWindowWidth } from '../../app/hooks/useWindowWidth';
 import { DEFAULT_SCREEN_WIDTH } from '../../app/constants';
+import { InlineCardLoader } from '../../features/Card/InlineCardLoader';
+import { CardLoader } from '../../features/Card/CardLoader';
 
 export const Products: React.FC = () => {
   const products = useSelector(selectProducts);
@@ -90,9 +91,11 @@ export const Products: React.FC = () => {
           })
         ) : (
           <div className={cls.products_cards}>
-            {new Array(6).fill('').map((_, idx) => (
-              <CardLoader key={idx} />
-            ))}
+            {new Array(6)
+              .fill('')
+              .map((_, idx) =>
+                !isMobileCards ? <InlineCardLoader key={idx} /> : <CardLoader key={idx} />,
+              )}
           </div>
         )}
       </div>

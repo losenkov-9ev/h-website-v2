@@ -1,4 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import { ELoadingStatus } from '../../@types/types';
 
 export interface IAuthParams {
@@ -11,7 +10,7 @@ export interface IChangePasswordParams {
   new_password: string;
 }
 
-export interface IAuthStateItem {
+interface IAuthStateItem {
   status: ELoadingStatus;
   error: string | null;
 }
@@ -22,5 +21,3 @@ export interface IAuthState {
 }
 
 export type AuthAPIResponce = { ok: true };
-
-export type SuccessAction = PayloadAction<AuthAPIResponce>;

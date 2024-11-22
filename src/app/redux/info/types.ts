@@ -1,15 +1,15 @@
 import { ELoadingStatus } from '../../@types/types';
 
-export type TInfoLinks = {
+type TInfoLinks = {
   link: string;
   text: string;
 }[];
-export type TInfoCurrency = {
+type TInfoCurrency = {
   name: string;
   symbol: string;
 };
-export type TInfoSupport = string;
-export type TInfoSupportChat = boolean;
+type TInfoSupport = string;
+type TInfoSupportChat = boolean;
 
 export interface INotiffication {
   title: string;
@@ -17,11 +17,11 @@ export interface INotiffication {
   text: string;
   link: null;
 }
-export type TInfoNotifications = {
+type TInfoNotifications = {
   count: number;
   items: INotiffication[];
 };
-export type TInfoRating = {
+type TInfoRating = {
   count: number;
   stars: number;
 };
@@ -43,57 +43,57 @@ export interface IPaymentItem {
   amount: number;
   type: EPaymentType;
 }
-export interface IPayments {
+interface IPayments {
   page: number;
   all: boolean;
   items: IPaymentItem[];
 }
 
-export interface IPurchaseItem {
+interface IPurchaseItem {
   amount: number;
   datetime: string;
   id: number;
   title: string;
 }
-export interface IPurchases {
+interface IPurchases {
   page: number;
   all: boolean;
   items: IPurchaseItem[];
 }
 
-export interface IAccountData {
+interface IAccountData {
   login: string;
   balance: number;
   payments: IPayments;
   purchases: IPurchases;
 }
-export type TInfoAccount = {
+type TInfoAccount = {
   auth: boolean;
   data: IAccountData | Record<string, never>;
 };
 
-export type TInfoMethods = {
+type TInfoMethods = {
   [key in EPaymentType]: boolean;
 };
 
-export type TInfoReviews = {
+type TInfoReviews = {
   count: number;
   columns: unknown;
   all: boolean;
   show: boolean;
 };
 
-export type TFilterItem = { id: number; name: string };
-export type TInfoShowcases = {
+type TFilterItem = { id: number; name: string };
+type TInfoShowcases = {
   status: boolean;
   items: TFilterItem[];
 };
 
-export type TInfoSections = TFilterItem[];
+type TInfoSections = TFilterItem[];
 
-export type TInfoPromocodes = boolean;
+type TInfoPromocodes = boolean;
 
-export type TInfoSite = {
+type TInfoSite = {
   newyear: boolean;
   background_opacity: number;
   style: string;

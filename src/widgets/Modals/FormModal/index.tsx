@@ -12,7 +12,7 @@ import { IAuthParams } from '../../../app/redux/auth/types';
 import { selectAuthError, selectAuthStatus } from '../../../app/redux/auth/selectors';
 import { useAsyncProcess } from '../../../app/hooks/useAsyncProcess';
 
-export type FormModalProps = TDefaultProps & {
+type FormModalProps = TDefaultProps & {
   type: EFormType;
 };
 

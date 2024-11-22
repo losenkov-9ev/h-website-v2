@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface SelectProps {
+interface SelectProps {
   children: ReactNode;
   placeholder?: string | ReactNode;
   fullWidth?: boolean;

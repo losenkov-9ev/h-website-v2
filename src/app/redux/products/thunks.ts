@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../axios';
 import pluralize from 'pluralize';
 
-export type fetchProductsParams = { filter: string; id: number }[];
-export type fetchProductsRequestBody = (filters?: fetchProductsParams) => string;
+type fetchProductsParams = { filter: string; id: number }[];
+type fetchProductsRequestBody = (filters?: fetchProductsParams) => string;
 
 const requestBody: fetchProductsRequestBody = (filters) => {
   // Приведение фильтра к единственному числу

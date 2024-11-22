@@ -10,6 +10,7 @@ import { fetchAllOrders } from '../../app/redux/orders/thunks';
 import { selectAllOrders, selectAllOrdersStatus } from '../../app/redux/orders/selectors';
 import { ELoadingStatus } from '../../app/@types/types';
 import { CardLoader } from '../../features/Card/CardLoader';
+import { InlineCardLoader } from '../../features/Card/InlineCardLoader';
 
 export const AccontPurchaseHistory: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -29,7 +30,11 @@ export const AccontPurchaseHistory: React.FC = () => {
           <div className={clsx(cls.accontPurchaseHistory_title, 'h-1')}>История покупок</div>
           <div className={cls.accontPurchaseHistory_box}>
             {productsStatus !== ELoadingStatus.fulfilled
-              ? new Array(6).fill('').map((_, idx) => <CardLoader key={`${_}_${idx}`} />)
+              ? new Array(6)
+                  .fill('')
+                  .map((_, idx) =>
+                    !isMobile ? <InlineCardLoader key={idx} /> : <CardLoader key={idx} />,
+                  )
               : products?.orders.map(({ title: name, id, amount: price, datetime }, idx) =>
                   !isMobile ? (
                     <InlineCard

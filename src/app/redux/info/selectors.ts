@@ -2,9 +2,9 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { selectAccountPaymentItems } from '../payment/selectors';
 
-export const selectInfoStatus = (state: RootState) => state.info.status;
+const selectInfoStatus = (state: RootState) => state.info.status;
 
-export const selectIsAuthState = (state: RootState) => state.info.data.account.auth;
+const selectIsAuthState = (state: RootState) => state.info.data.account.auth;
 const selectAccountState = (state: RootState) => state.info.data.account;
 
 const selectShowcasesState = (state: RootState) => state.info.data.showcases.items;

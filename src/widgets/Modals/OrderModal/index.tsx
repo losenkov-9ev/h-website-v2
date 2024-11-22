@@ -17,7 +17,7 @@ import cls from './OrderModal.module.scss';
 import Icon from '../../../shared/Icon';
 import clsx from 'clsx';
 
-export type OrderModalProps = TDefaultProps & {
+type OrderModalProps = TDefaultProps & {
   orderId?: number;
 };
 
@@ -36,7 +36,7 @@ interface ModalInfoProps {
   type?: string;
 }
 
-export const ModalInfo: React.FC<ModalInfoProps> = (props) => {
+const ModalInfo: React.FC<ModalInfoProps> = (props) => {
   const {
     id,
     orderStaus = 1,

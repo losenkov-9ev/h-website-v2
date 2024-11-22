@@ -4,7 +4,7 @@ import { ModalWrapper } from '..';
 import { Button, EButtonView } from '../../../shared/Button';
 import { TDefaultProps } from '../types';
 
-export type ConfirmModalProps = TDefaultProps & {
+type ConfirmModalProps = TDefaultProps & {
   title: string;
   buttonContent: string;
 };

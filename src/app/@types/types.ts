@@ -6,16 +6,8 @@ export enum ELocation {
   reviews = '/reviews',
 }
 
-export enum EOrderStatus {
-  payed = 'payed',
-  wairing = 'waiting',
-  fail = 'fail',
-}
-
 export enum ELoadingStatus {
   loading = 'loading',
   fulfilled = 'fulfilled',
   rejected = 'rejected',
 }
-
-export type MetaType = Record<string, number>;

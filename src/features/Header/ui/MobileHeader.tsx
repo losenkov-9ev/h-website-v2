@@ -45,7 +45,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
           </Link>
           <div className={cls.headerMobile_controls}>
             <ThemeToggler />
-            <Notiffications />
+            {isAuthorized && <Notiffications />}
             <Button
               onClick={onToggleMenu}
               className={cls.headerMobile_burger}
