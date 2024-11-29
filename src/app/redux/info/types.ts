@@ -61,7 +61,7 @@ interface IPurchases {
   items: IPurchaseItem[];
 }
 
-interface IAccountData {
+export interface IAccountData {
   login: string;
   balance: number;
   payments: IPayments;

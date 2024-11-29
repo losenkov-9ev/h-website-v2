@@ -11,7 +11,7 @@ export enum EButtonView {
   default = 'default',
 }
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   className?: string;
   fullWidth?: boolean;

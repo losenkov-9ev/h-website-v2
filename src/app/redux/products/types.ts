@@ -6,7 +6,7 @@ type TFilterData = {
   categories: TFilterType[];
 };
 
-interface IProduct {
+export interface IProduct {
   id: number;
   status: boolean;
   image: string;
